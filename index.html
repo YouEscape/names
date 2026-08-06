@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Names</title>
+</head>
+<body>
+  <h1>Names</h1>
+  <div id="names"></div>
+  <script>
+    fetch('names.json')
+      .then(r => r.json())
+      .then(data => {
+        const container = document.getElementById('names');
+        Object.entries(data.record).forEach(([tier, names]) => {
+          const section = document.createElement('section');
+          section.innerHTML = '<h2>' + tier + '</h2><ul>' +
+            names.map(n => '<li>' + n + '</li>').join('') + '</ul>';
+          container.appendChild(section);
+        });
+      });
+  </script>
+</body>
+</html>
